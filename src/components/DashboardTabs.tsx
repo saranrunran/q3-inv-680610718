@@ -3,6 +3,7 @@ import { useItemStore } from '@/store/dataStore';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import type { InventoryItem } from "@/types/datatypes";
+import { Apple } from "lucide-react";
 
 
 export function DashboardTabs() {
@@ -106,7 +107,8 @@ export function DashboardTabs() {
               </CardContent>
             </Card>
             <Card>
-              <CardHeader className="flex flex-row items-center justify-between pb-2">
+              <CardHeader className="">
+                <Apple size={20}></Apple>
                 <CardTitle className="text-sm font-medium">Grocery</CardTitle>
               </CardHeader>
               <CardContent>
