@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useItemStore } from '@/store/dataStore';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import type { InventoryItem } from "@/types/datatypes";
 
 
 export function DashboardTabs() {
@@ -12,27 +13,34 @@ export function DashboardTabs() {
   const totalQuantity = inventory.reduce((sum, item) => sum + item.quantity, 0);
   const totalValue = inventory.reduce((sum,item) => sum + (item.price*item.quantity), 0)
 
-  // type CategoryTotals = Record<string, number>;
+  type CategoryTotals = Record<string, number>;
 
-  // const totalElec = inventory.reduce((acc, cerrItem) => {
-  //   const { category, quantity } = currItem;
-  //   if (!accumulator[category]) {
-  //     accumulator[category] = 0;
-  //   }
+  const totalsByCategory = inventory.reduce<CategoryTotals>((accumulator, currentItem) => {
+    const { category, quantity } = currentItem;
+    if (!accumulator[category]) {
+      accumulator[category] = 0;
+    }
     
-  //   accumulator[category] += quantity;
-  // }, {})
+    accumulator[category] += quantity;
+    
+    return accumulator;
+  }, {});
 
-  // const totalsByCategory = inventory.reduce<CategoryTotals>((accumulator, currentItem) => {
-  //   const { category, quantity } = currentItem;
-  //   if (!accumulator[category]) {
-  //     accumulator[category] = 0;
-  //   }
-    
-  //   accumulator[category] += quantity;
-    
-  //   return accumulator;
-  // }, {});
+  const calculateTotalByCategory = (items: InventoryItem[]): Record<string, number> => {
+    return items.reduce((acc, item) => {
+      const itemTotalValue = item.price * item.quantity;
+
+      if (!acc[item.category]) {
+        acc[item.category] = 0;
+      }
+
+      acc[item.category] += itemTotalValue;
+
+      return acc;
+    }, {} as Record<string, number>);
+  };
+
+  const totals = calculateTotalByCategory(inventory);
 
   const [mode, setMode] = useState<"overview" | "category">("overview");
 
@@ -84,7 +92,7 @@ export function DashboardTabs() {
                 <CardTitle className="text-sm font-medium">Electronics</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-xl font-bold">฿...</div>
+                <div className="text-xl font-bold">฿{totals.Electronics}.00</div>
               </CardContent>
             </Card>
             <Card>
@@ -92,7 +100,7 @@ export function DashboardTabs() {
                 <CardTitle className="text-sm font-medium">Stationery</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-xl font-bold"></div>
+                <div className="text-xl font-bold">฿{totals.Stationery}.00</div>
               </CardContent>
             </Card>
             <Card>
@@ -100,7 +108,7 @@ export function DashboardTabs() {
                 <CardTitle className="text-sm font-medium">Grocery</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-xl font-bold">...</div>
+                <div className="text-xl font-bold">฿{totals.Grocery}.00</div>
               </CardContent>
             </Card>
             <Card>
@@ -108,7 +116,7 @@ export function DashboardTabs() {
                 <CardTitle className="text-sm font-medium">Clothing</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-xl font-bold">...</div>
+                <div className="text-xl font-bold">฿{totals.Clothing}.00</div>
               </CardContent>
             </Card>
             <Card>
@@ -116,7 +124,7 @@ export function DashboardTabs() {
                 <CardTitle className="text-sm font-medium">Tools</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="ttext-xl font-bold">...</div>
+                <div className="ttext-xl font-bold">฿{totals.Tools}.00</div>
               </CardContent>
             </Card>
             <Card>
@@ -124,7 +132,7 @@ export function DashboardTabs() {
                 <CardTitle className="text-sm font-medium">Other</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-xl font-bold">...</div>
+                <div className="text-xl font-bold">฿{totals.Other}.00</div>
               </CardContent>
             </Card>
           </div>
