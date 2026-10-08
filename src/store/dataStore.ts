@@ -3,15 +3,11 @@ import { persist } from "zustand/middleware";
 
 import {
   inventory as initialInventory,
-  inventory
 } from "@/lib/mock-data";
 import type { InventoryItem } from "@/types/datatypes";
 
 type ItemState = {
   inventory: InventoryItem[];
-  // name: InventoryItem[];
-  // quantity: InventoryItem[];
-  // price: InventoryItem[];
   addInventoryItem: (
     name: string,
     quantity: number,
@@ -25,7 +21,6 @@ type ItemState = {
 export const useItemStore = create<ItemState>()(
   persist(
     (set) => ({
-      // Default initial items used only if localStorage is completely empty
       inventory: initialInventory,
 
       addInventoryItem: (name, quantity, price, category) =>
