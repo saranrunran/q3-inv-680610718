@@ -89,7 +89,7 @@ export function DashboardTabs() {
         <TabsContent value="category" className="pt-2">
           <div className="grid gap-2 md:grid-cols-6">
             <Card>
-              <CardHeader className="flex flex-row items-center justify-between pb-2">
+              <CardHeader>
                 <Laptop size={20}></Laptop>
                 <CardTitle className="text-sm font-medium">Electronics</CardTitle>
               </CardHeader>
