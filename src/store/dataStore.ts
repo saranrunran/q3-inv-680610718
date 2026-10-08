@@ -1,72 +1,33 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { type InventoryItem } from "../types/datatypes";
 
-interface ItemState {
+import {
+  inventory as initialInventory,
+  inventory
+} from "@/lib/mock-data";
+import type { InventoryItem } from "@/types/datatypes";
+
+type ItemState = {
   inventory: InventoryItem[];
+  // name: InventoryItem[];
+  // quantity: InventoryItem[];
+  // price: InventoryItem[];
   addInventoryItem: (
     name: string,
     quantity: number,
     price: number,
     category: InventoryItem["category"],
   ) => void;
-  // deleteInventoryItem: (id: string) => void;
+  deleteInventoryItem: (id: string) => void;
 }
+
 
 export const useItemStore = create<ItemState>()(
   persist(
     (set) => ({
       // Default initial items used only if localStorage is completely empty
-      inventory: [
-        {
-          id: "1",
-          name: "เมาส์ไร้สาย Logitech",
-          quantity: 25,
-          price: 590,
-          category: "Electronics",
-          date: "2026-10-01",
-        },
-        {
-          id: "2",
-          name: "ปากกาลูกลื่น (กล่อง 50 ด้าม)",
-          quantity: 12,
-          price: 150,
-          category: "Stationery",
-          date: "2026-10-02",
-        },
-        {
-          id: "3",
-          name: "ข้าวหอมมะลิ 5 กก.",
-          quantity: 40,
-          price: 185,
-          category: "Grocery",
-          date: "2026-10-03",
-        },
-        {
-          id: "4",
-          name: "เสื้อยืดคอกลม",
-          quantity: 60,
-          price: 199,
-          category: "Clothing",
-          date: "2026-10-03",
-        },
-        {
-          id: "5",
-          name: "ไขควงชุด 12 ชิ้น",
-          quantity: 8,
-          price: 320,
-          category: "Tools",
-          date: "2026-10-03",
-        },
-        {
-          id: "6",
-          name: "สาย USB-C 1 เมตร",
-          quantity: 100,
-          price: 89,
-          category: "Electronics",
-          date: "2026-10-04",
-        },
-      ],
+      inventory: initialInventory,
+
       addInventoryItem: (name, quantity, price, category) =>
         set((state) => ({
           inventory: [
@@ -81,11 +42,19 @@ export const useItemStore = create<ItemState>()(
             ...state.inventory,
           ],
         })),
+      
+      deleteInventoryItem: (id) =>
+        set((state) => ({
+          inventory: state.inventory.filter((i) => i.id !== id);
+        }))
 
     }),
     {
       // Unique key name for the localStorage entry
-      name: "app-storage",
+      name: "inv-680610718",
+      partialize: (state) => ({
+        inventory: state.inventory,
+      }),
     },
   ),
 );
