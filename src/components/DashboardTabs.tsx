@@ -8,6 +8,32 @@ export function DashboardTabs() {
 
   const inventory = useItemStore((state) => state.inventory);
   const totalProducts = inventory.length;
+  
+  const totalQuantity = inventory.reduce((sum, item) => sum + item.quantity, 0);
+  const totalValue = inventory.reduce((sum,item) => sum + (item.price*item.quantity), 0)
+
+  // type CategoryTotals = Record<string, number>;
+
+  // const totalElec = inventory.reduce((acc, cerrItem) => {
+  //   const { category, quantity } = currItem;
+  //   if (!accumulator[category]) {
+  //     accumulator[category] = 0;
+  //   }
+    
+  //   accumulator[category] += quantity;
+  // }, {})
+
+  // const totalsByCategory = inventory.reduce<CategoryTotals>((accumulator, currentItem) => {
+  //   const { category, quantity } = currentItem;
+  //   if (!accumulator[category]) {
+  //     accumulator[category] = 0;
+  //   }
+    
+  //   accumulator[category] += quantity;
+    
+  //   return accumulator;
+  // }, {});
+
   const [mode, setMode] = useState<"overview" | "category">("overview");
 
   return (
@@ -30,7 +56,7 @@ export function DashboardTabs() {
                 <CardTitle className="text-sm font-medium">Total Stock Value</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl text-red-500 font-bold">฿</div>
+                <div className="text-2xl text-red-500 font-bold">฿{totalValue}.00</div>
               </CardContent>
             </Card>
             <Card>
@@ -46,7 +72,7 @@ export function DashboardTabs() {
                 <CardTitle className="text-sm font-medium">Total Units in Stock</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl text-green-700 font-bold">...</div>
+                <div className="text-2xl text-green-700 font-bold">{totalQuantity}</div>
               </CardContent>
             </Card>
           </div>
@@ -58,7 +84,7 @@ export function DashboardTabs() {
                 <CardTitle className="text-sm font-medium">Electronics</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl text-red-500 font-bold">฿...</div>
+                <div className="text-xl font-bold">฿...</div>
               </CardContent>
             </Card>
             <Card>
@@ -66,7 +92,7 @@ export function DashboardTabs() {
                 <CardTitle className="text-sm font-medium">Stationery</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl text-blue-500 font-bold">{totalProducts}</div>
+                <div className="text-xl font-bold"></div>
               </CardContent>
             </Card>
             <Card>
@@ -74,7 +100,7 @@ export function DashboardTabs() {
                 <CardTitle className="text-sm font-medium">Grocery</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl text-green-700 font-bold">...</div>
+                <div className="text-xl font-bold">...</div>
               </CardContent>
             </Card>
             <Card>
@@ -82,7 +108,7 @@ export function DashboardTabs() {
                 <CardTitle className="text-sm font-medium">Clothing</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl text-green-700 font-bold">...</div>
+                <div className="text-xl font-bold">...</div>
               </CardContent>
             </Card>
             <Card>
@@ -90,7 +116,7 @@ export function DashboardTabs() {
                 <CardTitle className="text-sm font-medium">Tools</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl text-green-700 font-bold">...</div>
+                <div className="ttext-xl font-bold">...</div>
               </CardContent>
             </Card>
             <Card>
@@ -98,7 +124,7 @@ export function DashboardTabs() {
                 <CardTitle className="text-sm font-medium">Other</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl text-green-700 font-bold">...</div>
+                <div className="text-xl font-bold">...</div>
               </CardContent>
             </Card>
           </div>
