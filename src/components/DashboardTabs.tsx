@@ -3,7 +3,7 @@ import { useItemStore } from '@/store/dataStore';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import type { InventoryItem } from "@/types/datatypes";
-import { Apple } from "lucide-react";
+import { Apple, Laptop } from "lucide-react";
 
 
 export function DashboardTabs() {
@@ -90,6 +90,7 @@ export function DashboardTabs() {
           <div className="grid gap-2 md:grid-cols-6">
             <Card>
               <CardHeader className="flex flex-row items-center justify-between pb-2">
+                <Laptop size={20}></Laptop>
                 <CardTitle className="text-sm font-medium">Electronics</CardTitle>
               </CardHeader>
               <CardContent>
