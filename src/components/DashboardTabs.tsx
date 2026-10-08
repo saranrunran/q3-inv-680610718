@@ -93,6 +93,7 @@ export function DashboardTabs() {
               </CardHeader>
               <CardContent>
                 <div className="text-xl font-bold">฿{totals.Electronics}.00</div>
+                <div className="text-xs text-muted-foreground">{totalsByCategory.Electronics} units</div>
               </CardContent>
             </Card>
             <Card>
@@ -101,6 +102,7 @@ export function DashboardTabs() {
               </CardHeader>
               <CardContent>
                 <div className="text-xl font-bold">฿{totals.Stationery}.00</div>
+                <div className="text-xs text-muted-foreground">{totalsByCategory.Stationery} units</div>
               </CardContent>
             </Card>
             <Card>
@@ -109,6 +111,7 @@ export function DashboardTabs() {
               </CardHeader>
               <CardContent>
                 <div className="text-xl font-bold">฿{totals.Grocery}.00</div>
+                <div className="text-xs text-muted-foreground">{totalsByCategory.Grocery} units</div>
               </CardContent>
             </Card>
             <Card>
@@ -117,6 +120,7 @@ export function DashboardTabs() {
               </CardHeader>
               <CardContent>
                 <div className="text-xl font-bold">฿{totals.Clothing}.00</div>
+                <div className="text-xs text-muted-foreground">{totalsByCategory.Clothing} units</div>
               </CardContent>
             </Card>
             <Card>
@@ -124,7 +128,8 @@ export function DashboardTabs() {
                 <CardTitle className="text-sm font-medium">Tools</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="ttext-xl font-bold">฿{totals.Tools}.00</div>
+                <div className="text-xl font-bold">฿{totals.Tools}.00</div>
+                <div className="text-xs text-muted-foreground">{totalsByCategory.Tools} units</div>
               </CardContent>
             </Card>
             <Card>
@@ -133,6 +138,7 @@ export function DashboardTabs() {
               </CardHeader>
               <CardContent>
                 <div className="text-xl font-bold">฿{totals.Other}.00</div>
+                <div className="text-xs text-muted-foreground">{totalsByCategory.Other} units</div>
               </CardContent>
             </Card>
           </div>
