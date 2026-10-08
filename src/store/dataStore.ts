@@ -45,8 +45,8 @@ export const useItemStore = create<ItemState>()(
       
       deleteInventoryItem: (id) =>
         set((state) => ({
-          inventory: state.inventory.filter((i) => i.id !== id);
-        }))
+          inventory: state.inventory.filter((i) => i.id !== id),
+        })),
 
     }),
     {
