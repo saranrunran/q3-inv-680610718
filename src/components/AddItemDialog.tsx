@@ -26,7 +26,19 @@ export function AddItemDialog() {
     e.preventDefault();
     if (!name || !quantity || !price) return;
 
-    // addInventoryItem(name, parseInt(quantity), parseFloat(price), category);
+    addInventoryItem(
+      name, parseInt(quantity), 
+      parseFloat(price), 
+      category
+    );
+
+    /*addInventoryItem({
+      name: name, 
+      quantity: parseInt(quantity), 
+      price: parseFloat(price), 
+      category: category,
+    }); */
+
     setName("");
     setQuantity("");
     setPrice("");
@@ -44,7 +56,10 @@ export function AddItemDialog() {
         <DialogHeader>
           <DialogTitle>New Product</DialogTitle>
         </DialogHeader>
-        <form onSubmit={handleSubmit} className="space-y-5 mt-4">
+        <form
+          onSubmit={handleSubmit} 
+          className="space-y-5 mt-4"
+        >
           <div className="flex flex-col gap-1.5">
             <Label htmlFor="name">Product Name</Label>
             <Input
